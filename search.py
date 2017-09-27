@@ -142,11 +142,9 @@ def breadth_first_search(problem):
         if problem.is_goal_state(current_state[0]):
             return node_list            #return path.
 
-        successor_list = problem.get_successors(current_state[0])
-        print current_state[0]
-        
         if current_state[0] not in visited_list:
             visited_list.append(current_state[0])
+            successor_list = problem.get_successors(current_state[0])
             
             for i, node in enumerate(successor_list):
                 if successor_list[i][0] in visited_list:
