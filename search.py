@@ -107,11 +107,10 @@ def depth_first_search(problem):
         node_list = current_state[1]
         if problem.is_goal_state(current_state[0]):
             return node_list            #return path.
-
-        successor_list = problem.get_successors(current_state[0])
         
         if current_state[0] not in visited_list:
             visited_list.append(current_state[0])
+            successor_list = problem.get_successors(current_state[0])
             
             for i, node in enumerate(successor_list):
                 if successor_list[i][0] in visited_list:
@@ -161,6 +160,30 @@ def breadth_first_search(problem):
 def uniform_cost_search(problem):
     """Search the node of least total cost first."""
     "*** YOUR CODE HERE ***"
+    from util import PriorityQueue
+    queue = PriorityQueue()
+    node_list = []
+    queue.push((problem.get_start_state(), node_list), 0)
+    visited_list = []
+    
+    
+    while not queue.is_empty():
+        current_state = queue.pop()                                 #pop from the queue
+        node_list = current_state[1]
+        if problem.is_goal_state(current_state[0]):
+            return node_list            #return path.
+
+        if current_state[0] not in visited_list:
+            visited_list.append(current_state[0])
+            successor_list = problem.get_successors(current_state[0])
+            
+            for i, node in enumerate(successor_list):
+                if successor_list[i][0] in visited_list:
+                    continue
+                else:
+                    node_list.append(successor_list[i][1])
+                    queue.push(((successor_list[i][0], node_list)), successor_list[i][2])  #append movement to list
+                    node_list = node_list[:-1]                       #remove last element of list to maintain path of specific states
     util.raise_not_defined()
 
 
