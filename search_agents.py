@@ -1,5 +1,25 @@
 """search_agents.py
 
+Author: Fletcher Hart & Jonah Allibone
+Class: CSI-480-02
+Assignment: Python Search
+Due Date: 9/28/17 11:59pm
+ 
+Description:
+Creating heuristic functions for the A* search algorithm in order to shorten
+search time for several use cases
+ 
+Certification of Authenticity: 
+I certify that this is entirely my own work, except where I have given 
+fully-documented references to the work of others. I understand the definition 
+and consequences of plagiarism and acknowledge that the assessor of this 
+assignment may, for the purpose of assessing this assignment:
+- Reproduce this assignment and provide a copy to another member of academic
+- staff; and/or Communicate a copy of this assignment to a plagiarism checking
+- service (which may then retain a copy of this assignment on its database for
+- the purpose of future plagiarism checking)
+
+
 This file contains all of the agents that can be selected to control Pacman.  To
 select an agent, use the '-p' option when running pacman.py.  Arguments can be
 passed to your agent using '-a'.  For example, to load a SearchAgent that uses
@@ -494,6 +514,17 @@ def food_heuristic(state, problem):
     """
     position, food_grid = state
     "*** YOUR CODE HERE ***"
+    
+    (x1, y1) = state[0]
+    food_locations = food_grid.as_list()
+    
+    if problem.is_goal_state(state):
+        return 0
+    
+    if food_locations:
+        (x2, y2) = food_locations[0]
+        return abs(x1-x2) + abs(y1-y2)
+    
     return 0
 
 
