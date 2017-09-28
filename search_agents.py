@@ -481,6 +481,18 @@ def food_heuristic(state, problem):
     """
     position, food_grid = state
     "*** YOUR CODE HERE ***"
+    
+    if problem.is_goal_state(state):
+        return 0
+    
+    (x1,y1) = state[0]
+    food_locations = food_grid.as_list()
+    for i, loc in enumerate(food_locations):
+        if food_locations:
+            (x2,y2) = food_locations[0]
+            return abs(x1-x2) + abs(y1-y2)
+
+        
     return 0
 
 
