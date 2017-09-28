@@ -357,7 +357,7 @@ class CornersProblem(search.SearchProblem):
             "*** YOUR CODE HERE ***"
             if not hits_wall:
                 successors.append(((nextx, nexty), action, 1))
-            else continue
+            else 
         self._expanded += 1  # DO NOT CHANGE
         return successors
 
