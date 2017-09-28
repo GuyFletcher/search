@@ -219,6 +219,32 @@ def null_heuristic(state, problem=None):
 def a_star_search(problem, heuristic=null_heuristic):
     """Search the node that has the lowest combined cost and heuristic first."""
     "*** YOUR CODE HERE ***"
+
+    from util import PriorityQueue
+    priority_queue = PriorityQueue()
+    node_list = []
+    priority_queue.push((problem.get_start_state(), node_list, 0.0), 0.0)
+    visited_list = []
+
+    print(heuristic(problem.get_start_state(), problem))
+    
+    while not priority_queue.is_empty():
+        current_state = priority_queue.pop()                                 #pop from the priority_queue
+        node_list = current_state[1]
+        if problem.is_goal_state(current_state[0]):
+            return node_list            #return path.
+
+        if current_state[0] not in visited_list:
+            visited_list.append(current_state[0])
+            successor_list = problem.get_successors(current_state[0])
+            
+            for i, node in enumerate(successor_list):
+                if successor_list[i][0] in visited_list:
+                    continue
+                else:
+                    node_list.append(successor_list[i][1])
+                    priority_queue.push(((successor_list[i][0], node_list, current_state[2]+successor_list[i][2])), current_state[2]+successor_list[i][2]+heuristic(successor_list[i][0], problem))  #append movement to list, along with cost
+                    node_list = node_list[:-1]                       #remove last element of list to maintain path of specific states
     util.raise_not_defined()
 
 # Abbreviations
