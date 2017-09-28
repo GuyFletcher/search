@@ -1,3 +1,25 @@
+"""
+Author: Fletcher Hart & Jonah Allibone
+Class: CSI-480-02
+Assignment: Python Search
+Due Date: 9/28/17 11:59pm
+ 
+Description:
+Creating functions for depth first, breadth first, Uniform Cost, and A* search algorithms using
+Stack, Queue, and Priority Queue as provided in the util.py file
+ 
+Certification of Authenticity: 
+I certify that this is entirely my own work, except where I have given 
+fully-documented references to the work of others. I understand the definition 
+and consequences of plagiarism and acknowledge that the assessor of this 
+assignment may, for the purpose of assessing this assignment:
+- Reproduce this assignment and provide a copy to another member of academic
+- staff; and/or Communicate a copy of this assignment to a plagiarism checking
+- service (which may then retain a copy of this assignment on its database for
+- the purpose of future plagiarism checking)
+
+"""
+
 """search.py
 
 Champlain College CSI-480, Fall 2017
@@ -163,7 +185,7 @@ def uniform_cost_search(problem):
     from util import PriorityQueue
     priority_queue = PriorityQueue()
     node_list = []
-    priority_queue.push((problem.get_start_state(), node_list), 0.0)
+    priority_queue.push((problem.get_start_state(), node_list, 0.0), 0.0)
     visited_list = []
     
     while not priority_queue.is_empty():
@@ -181,7 +203,7 @@ def uniform_cost_search(problem):
                     continue
                 else:
                     node_list.append(successor_list[i][1])
-                    priority_queue.update(((successor_list[i][0], node_list)), successor_list[i][2])  #append movement to list
+                    priority_queue.update(((successor_list[i][0], node_list, current_state[2]+successor_list[i][2])), current_state[2]+successor_list[i][2])  #append movement to list, along with cost
                     node_list = node_list[:-1]                       #remove last element of list to maintain path of specific states
     util.raise_not_defined()
 
