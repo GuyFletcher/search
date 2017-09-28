@@ -176,8 +176,6 @@ def breadth_first_search(problem):
                     node_list = node_list[:-1]                       #remove last element of list to maintain path of specific states
 
     
-    util.raise_not_defined()
-
 
 def uniform_cost_search(problem):
     """Search the node of least total cost first."""
@@ -225,8 +223,6 @@ def a_star_search(problem, heuristic=null_heuristic):
     node_list = []
     priority_queue.push((problem.get_start_state(), node_list, 0.0), 0.0)
     visited_list = []
-
-    print(heuristic(problem.get_start_state(), problem))
     
     while not priority_queue.is_empty():
         current_state = priority_queue.pop()                                 #pop from the priority_queue
@@ -245,7 +241,6 @@ def a_star_search(problem, heuristic=null_heuristic):
                     node_list.append(successor_list[i][1])
                     priority_queue.push(((successor_list[i][0], node_list, current_state[2]+successor_list[i][2])), current_state[2]+successor_list[i][2]+heuristic(successor_list[i][0], problem))  #append movement to list, along with cost
                     node_list = node_list[:-1]                       #remove last element of list to maintain path of specific states
-    util.raise_not_defined()
 
 # Abbreviations
 bfs = breadth_first_search
