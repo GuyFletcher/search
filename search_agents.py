@@ -467,7 +467,8 @@ class FoodSearchProblem:
             x, y = state[0]
             dx, dy = Actions.direction_to_vector(direction)
             nextx, nexty = int(x + dx), int(y + dy)
-            if not self.walls[nextx][nexty]:
+            wall_hit = self.walls[nextx][nexty]
+            if not wall_hit:
                 next_food = state[1].copy()
                 next_food[nextx][nexty] = False
                 successors.append((((nextx, nexty), next_food), direction, 1))
